@@ -1,0 +1,32 @@
+include vendor/lge/i_vzw/BoardConfigVendor.mk
+
+# Partitions (XXX: check these)
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x01400000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x01400000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 422576128
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
+
+# Kernel
+BOARD_USE_PREBUILT_KERNEL := true
+
+ifeq ($(BOARD_USE_PREBUILT_KERNEL),true)
+TARGET_PREBUILT_KERNEL_DIR := device/lge/i_vzw/kernels/q
+else
+# Build kernel from source
+TARGET_KERNEL_SOURCE := kernel/lge/iproj
+TARGET_KERNEL_CONFIG := spectrum_defconfig
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+endif
+
+BOARD_KERNEL_CMDLINE := androidboot.hardware=iproj
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_BASE := 0x40200000
+BOARD_FORCE_RAMDISK_ADDRESS := 0x41a00000
+
+include device/lge/iproj/BoardConfig.mk
+
+BOARD_CDMA_NETWORK := true
+
+# Device Assert.. ics, cwm, gb
+TARGET_OTA_ASSERT_DEVICE := i_vzw,vs920,VS920

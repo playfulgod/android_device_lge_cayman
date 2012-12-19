@@ -1,0 +1,874 @@
+import init.iproj.usb.rc
+
+on early-boot
+    # set RLIMIT_MEMLOCK to 64MB
+    setrlimit 8 67108864 67108864
+
+on boot
+# yennie.kang for AMI306
+    chown compass system /dev/k3g_misc
+    chmod 0660 /dev/k3g_misc
+    chown compass system /dev/k3dh_acc_misc
+    chmod 0660 dev/k3dh_acc_misc
+    chown compass system /dev/ami306
+    chmod 0660 dev/ami306
+    chown compass system /dev/ami306daemon
+    chmod 0660 dev/ami306daemon
+    chown compass system /dev/ami306hal
+    chmod 0660 dev/ami306hal
+    mkdir /data/amit 0770 compass system
+    mkdir /data/gesture 0770 compass system
+    chown system system /sys/devices/virtual/input/lge_touch/keyguard
+
+    # XXX: insmod bthid.ko?
+    mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
+    chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    chown system system /sys/module/sco/parameters/disable_esco
+    chmod 0660 /sys/module/bluetooth_power/parameters/power
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /proc/bluetooth/sleep/proto
+    chown bluetooth bluetooth /dev/ttyHS0
+    chmod 0660 /dev/ttyHS0
+    chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
+    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+
+    chmod 0444 /proc/cmdline
+    chown system system /sys/devices/platform/msm-charger/at_charge
+    chown system system /sys/devices/platform/msm-charger/at_chcomp
+    chown system system /sys/devices/platform/msm-charger/at_fuelrst
+    chown system system /sys/devices/platform/msm-charger/at_fuelval
+    chown system system /sys/devices/platform/msm-charger/at_pmrst
+    chown system system /sys/devices/platform/msm-charger/at_batl
+
+    # Torch perms
+    chown system camera /sys/class/leds/spotlight/brightness
+    chmod 0660 /sys/class/leds/spotlight/brightness
+
+    # PowerHAL perms
+    chown system system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+
+    #Create QMUX deamon socket area
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    chmod 2770 /dev/socket/qmux_radio
+    mkdir /dev/socket/qmux_audio 0770 media audio
+    chmod 2770 /dev/socket/qmux_audio
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    chmod 2770 /dev/socket/qmux_bluetooth
+
+    #port-bridge
+    chmod 0660 /dev/smd0
+    chown system system /dev/smd0
+
+    chmod 0660 /dev/ttyGS0
+    chown system system /dev/ttyGS0
+
+    # create symlink for fb1 as HDMI
+    symlink /dev/graphics/fb1 /dev/graphics/hdmi
+
+    # Remove write permissions to video related nodes
+    chmod 0664 /sys/devices/virtual/graphics/fb1/hpd
+    chmod 0664 /sys/devices/virtual/graphics/fb1/video_mode
+    chmod 0664 /sys/devices/virtual/graphics/fb1/format_3d
+
+    # Change owner and group for media server and surface flinger
+    chown system system /sys/devices/virtual/graphics/fb1/format_3d
+
+    #increase dirty_writeback_interval
+    #platform@lge.com : writeback & expire interval change for SD write sync issues
+    write /proc/sys/vm/dirty_writeback_centisecs 500
+    write /proc/sys/vm/dirty_expire_centisecs 200
+	
+    #For bridgemgr daemon to inform the USB driver of the correct transport
+    chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
+
+    #To allow interfaces to get v6 address when tethering is enabled
+    write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet3/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet4/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet5/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet6/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet7/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio0/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio1/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio2/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio3/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio4/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio5/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio6/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_sdio7/accept_ra 2
+    #sd card speed imporvement
+    write /sys/devices/virtual/bdi/179:0/read_ahead_kb 1024
+
+    # Change owner and group for factory
+    chown system system /sys/class/atcmd/name
+    chmod 0660 /sys/class/atcmd/name
+
+    chown system system /dev/lge_atcmd
+    chown system system /dev/eta_event_log
+
+    chown system system /sys/devices/platform/fsa8008.23/hookkeylog
+
+    chown system system /sys/module/lge_emmc_direct_access/parameters/frst_flag
+    chown system system /sys/module/lge_emmc_direct_access/parameters/boot_info
+    chown system system /sys/module/lge_emmc_direct_access/parameters/manual_test_mode
+    chown system system /sys/module/lge_emmc_direct_access/parameters/db_integrity_ready
+    chown system system /sys/module/lge_emmc_direct_access/parameters/fpri_crc_ready
+    chown system system /sys/module/lge_emmc_direct_access/parameters/file_crc_ready
+    chown system system /sys/module/lge_emmc_direct_access/parameters/db_dump_ready
+    chown system system /sys/module/lge_emmc_direct_access/parameters/db_copy_ready
+    chown system system /sys/module/lge_emmc_direct_access/parameters/integrity_ret
+    chown system system /sys/module/lge_emmc_direct_access/parameters/external_memory_test
+    chown system system /sys/module/lge_emmc_direct_access/parameters/fota_id_read
+    chown system system /sys/module/lge_emmc_direct_access/parameters/testmode_result
+
+    chown system graphics /sys/class/graphics/fb1/connected 
+    chown system graphics /sys/class/graphics/fb1/edid_modes 
+    chown system graphics /sys/class/graphics/fb1/power_state 
+    chown system graphics /sys/class/graphics/fb1/hpd 
+    chown system graphics /sys/class/graphics/fb1/hdcp_present 
+    chown system graphics /sys/class/graphics/fb1/hdmi_mode 
+    chmod 0660 /sys/class/graphics/fb1/power_state 
+    
+    # lcd on off test
+    chown system system /sys/devices/platform/msm_fb.524801/msm_fb_lcd_onoff
+    chmod 0644 /sys/devices/platform/msm_fb.524801/msm_fb_lcd_onoff
+
+    chown system system  /dev/block/mmcblk0
+    chmod 0660 /dev/block/mmcblk0
+
+    #chown system system /sys/module/lge_emmc_direct_access/parameters/rooting_nv
+    #chmod 0660 /sys/module/lge_emmc_direct_access/parameters/rooting_nv
+
+    chown system system  /sys/module/lge_emmc_direct_access/parameters/eri_info
+    chmod 0660 /sys/module/lge_emmc_direct_access/parameters/eri_info
+
+    chown system system /sys/module/lge_emmc_direct_access/parameters/cryptfs_cmd
+    chmod 0770 /sys/module/lge_emmc_direct_access/parameters/cryptfs_cmd
+
+    chown system system  /sys/module/lge_emmc_direct_access/parameters/bootcmd_write_block
+    chmod 0660 /sys/module/lge_emmc_direct_access/parameters/bootcmd_write_block
+    # LGE_ERI_DOWNLOAD
+    mkdir /data/eri
+    chown radio radio /data/eri
+    chmod 0777 /data/eri
+    chown radio radio /data/eri/eri.bin
+    chmod 0777 /data/eri/eri.bin
+
+    # [LGE_S][IPSecVPN] 20120327, yhak.kim@lge.com : Authentec IPSecVPN Kernel Module install
+    insmod /system/lib/modules/vpnclient.ko
+    # [LGE_E][IPSecVPN] 20120327, yhak.kim@lge.com : Authentec IPSecVPN Kernel Module install
+
+    # [brian1.cheon@lge.com] begin
+    chown system system /sys/devices/platform/qfuse_status_check/qfuse_status
+    # end       
+
+    # for Widevine Lv1, GB->ICS, permission change (media->system)
+    exec /system/xbin/WVGBCorrect
+
+    # Adjust socket buffer to enlarge TCP receive window for high bandwidth
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
+    write /proc/sys/net/ipv4/tcp_syn_retries  1
+
+on init
+    export EXTERNAL_STORAGE /storage/sdcard0
+
+# Backward compatibility
+    symlink /system/bin /bin
+
+# create mountpoints for storage
+    mkdir /storage 0111 system system
+    mkdir /storage/sdcard0 0000 system system
+    symlink /storage/sdcard0 /sdcard
+
+on emmc-fs
+    mkdir /system
+    wait /dev/block/mmcblk0p26
+    mount ext4 /dev/block/mmcblk0p26 /system ro barrier=1 data=ordered
+
+    setprop	ro.crypto.keyfile.userdata /dev/block/mmcblk0p30
+
+    wait /dev/block/mmcblk0p28
+    exec /system/bin/e2fsck -y /dev/block/mmcblk0p28
+    mount ext4 /dev/block/mmcblk0p28 /data nosuid nodev barrier=1 data=ordered noauto_da_alloc
+    # Executing tune2fs to reserve some region in /data. (40MB)
+    exec /system/bin/tune2fs -u system -r 10240 /dev/block/mmcblk0p28
+
+    #drm
+    mkdir /drm 0771 system system
+    wait /dev/block/mmcblk0p20
+    exec /system/bin/e2fsck -y /dev/block/mmcblk0p20
+    mount ext4 /dev/block/mmcblk0p20 /drm nosuid nodev barrier=1
+
+    #persist
+    wait /dev/block/mmcblk0p12
+    exec /system/bin/e2fsck -y /dev/block/mmcblk0p12
+    mount ext4 /dev/block/mmcblk0p12 /persist nosuid nodev barrier=1 data=ordered
+
+    #cache
+    wait /dev/block/mmcblk0p27
+    exec /system/bin/e2fsck -y /dev/block/mmcblk0p27
+    mount ext4 /dev/block/mmcblk0p27 /cache nosuid nodev barrier=1 data=ordered
+
+    #mpt
+    mkdir /mpt 0771 system system
+    wait /dev/block/mmcblk0p29
+    exec /system/bin/e2fsck -y /dev/block/mmcblk0p29
+    mount ext4 /dev/block/mmcblk0p29 /mpt nosuid nodev barrier=1 data=ordered
+
+    #mm
+    mkdir /mm 0771 system system
+    wait /dev/block/mmcblk0p23
+    exec /system/bin/e2fsck -y /dev/block/mmcblk0p23
+    mount ext4 /dev/block/mmcblk0p23 /mm nosuid nodev barrier=1
+
+    #drm
+    #mkdir /drm 0771 system system
+    #wait /dev/block/mmcblk0p20
+    exec /system/bin/e2fsck -y /dev/block/mmcblk0p20
+    mount ext4 /dev/block/mmcblk0p20 /drm nosuid nodev barrier=1
+
+    mkdir /tombstones 0771 system system
+    mount ext4 /dev/block/mmcblk0p22 /tombstones nosuid nodev barrier=1
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/mdm 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /firmware 0771 system system
+    wait /dev/block/mmcblk0p1
+#[LGE_UPDATE_S] changed /firmware mount options to remove other-writable permission, which is ATT requirement.
+#   mount vfat /dev/block/mmcblk0p1 /firmware ro shortname=lower
+    mount vfat /dev/block/mmcblk0p1 /firmware ro shortname=lower,umask=0003
+#[LGE_UPDATE_E] by jaein.lee(2011.06.29)
+    exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
+
+
+on post-fs
+    # mpt partition attribute
+    chown system system /mpt
+    chmod 0771 /mpt
+
+
+# msm specific files that need to be created on /data
+on post-fs-data
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+
+    # Create directory used by audio subsystem
+    mkdir /data/misc/audio 0770 audio audio
+
+    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
+
+    # Chown polling nodes as needed from UI running on system server
+    chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chown system system /sys/devices/platform/msm_sdcc.4/polling
+
+    #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
+    mkdir /data/system 0775 system system
+    symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
+
+    #Create directories for wiper services
+    mkdir /data/wpstiles/ 0755 shell
+    mkdir /data/wiper 0755 location qcom_oncrpc
+
+    #Create directories for gpsone_daemon services
+    mkdir /data/misc/gpsone_d 0770 system system
+
+    #Create directories for QuIPS
+    mkdir /data/misc/quipc 0770 gps system
+
+    #Create directories for Location services
+    mkdir /data/misc/location 0770 gps gps
+    mkdir /data/misc/location/mq 0770 gps gps
+
+    #Create directory from IMS services
+    mkdir /data/shared 0755
+    chown system system /data/shared
+
+    #Create directory for FOTA
+    mkdir /data/fota 0771
+    chown system system /data/fota
+
+    #Provide the access to hostapd.conf only to root and group
+    chmod 0660 /data/hostapd/hostapd.conf
+
+    # Create /data/time folder for time-services
+    mkdir /data/time/ 0700 system system
+    
+## LGE_P1: multimedia specific directories to process DRMed contents 
+    #mm
+    # double check the perms
+    chown system system /mm
+    chmod 0771 /mm
+    mkdir /mm/dt01 0770 media divxdrm
+    chown media divxdrm /mm/dt01
+    chmod 0770 /mm/dt01
+    mkdir /mm/dt01/ghd 0770 media divxdrm
+    chown media divxdrm /mm/dt01/ghd
+    chmod 0770 /mm/dt01/ghd
+    chown media divxdrm /mm/dt01/ghd/eogks.dat
+    chmod 0770 /mm/dt01/ghd/eogks.dat
+    mkdir /mm/dt01/rlf 0770 media divxdrm
+    chown media divxdrm /mm/dt01/rlf
+    chmod 0770 /mm/dt01/rlf
+    chown media divxdrm /mm/dt01/rlf/als.dat
+    chmod 0770 /mm/dt01/rlf/als.dat
+    mkdir /mm/dt01/ehd 0770 media divxdrm
+    chown media divxdrm /mm/dt01/ehd
+    chmod 0770 /mm/dt01/ehd
+    chown media divxdrm /mm/dt01/ehd/rnr.dat
+    chmod 0770 /mm/dt01/ehd/rnr.dat
+## LGE_P1_END
+
+    #platform-bsp@lge.com : enable subsystem-restart phase2 & ramdump
+#on property:ro.debuggable=0
+#    write /sys/module/subsystem_restart/parameters/restart_level 2
+
+#on property:ro.debuggable=1
+    write /sys/module/subsystem_restart/parameters/restart_level 1
+
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
+
+    chown system system /persist
+    chmod 0771 /persist
+
+    mkdir /persist/app_dme 0771 system system
+    chown system system /persist/app_dme
+    chmod 0771 /persist/app_dme
+
+    mkdir /data/fota 0773 system system
+    chown system system /data/fota
+    chmod 0775 /data/fota
+    chmod 0666 /data/fota/silence.txt
+
+    mkdir /cache/recovery 0774
+    chown system cache /cache/recovery
+    mkdir /cache/recovery/fota 0774
+    chown system system /cache/recovery/fota
+    chmod 0774 /cache/recovery/fota
+
+    mkdir /cache/fota 0777
+    chown system system /cache/fota
+    chmod 0777 /cache/fota
+    
+    mkdir /persist/fota 0773 system system
+    chown system system /persist/fota
+    chmod 0775 /persist/fota
+    chmod 0666 /persist/fota/silence.txt
+
+    setprop vold.post_fs_data_done 1
+
+# XXX: This is the ugly CM chargerlogo, replace it
+service chargerlogo /charger
+    class charger
+    user root
+
+service bootlogo /sbin/bootlogo
+    class main
+    user root
+    group root
+    oneshot
+
+on property:init.svc.chargerlogo=running
+    setprop sys.usb.config adb
+    start rmt_storage
+
+# Export GPIO56 for fusion targets to enable/disable hub
+service usbhub_init /system/bin/usbhub_init
+   class late_start
+   user root
+   disabled
+   oneshot
+
+on property:ro.board.platform=msm7630_fusion
+    start usbhub_init
+
+on property:bluetooth.isEnabled=true
+
+#    start btwlancoex
+    start btwlancoex
+    write /sys/class/bluetooth/hci0/idle_timeout 7000
+
+service cnd /system/bin/cnd
+    class late_start
+    socket cnd stream 666 root radio
+    disabled
+
+service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11 /dev/block/mmcblk0p13
+    class core
+    user root
+    disabled
+
+on property:ro.emmc=1
+    start rmt_storage
+
+service qmiproxy /system/bin/qmiproxy
+    class main
+    user radio
+    group radio
+    disabled
+
+# QMUX must be in multiple groups to support external process connections
+service qmuxd /system/bin/qmuxd
+    class main
+    user radio
+    group radio audio bluetooth
+    disabled
+
+#platform-bsp@lge.com : enable crash daemon for subsystem-restart phase2 & ramdump
+service subsystem_crashd /system/bin/subsystem_crashd
+    user system
+    group system
+    
+#platform@lge.com : autostart Q6 ramdump daemon
+service dspcrashd /system/bin/dspcrashd
+    user root
+    group root
+    disabled
+
+service hciattach /system/bin/init.qcom.bt.sh
+    class main
+    #user bluetooth
+    group bluetooth net_bt_admin
+    # group qcom_oncrpc?
+    disabled
+
+#service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
+#    class late_start
+#    user bluetooth
+#    group bluetooth system net_bt_admin inet
+#    disabled
+#    oneshot
+
+#service bt-sap /system/bin/sapd 15
+#    class late_start
+#    disabled
+#    oneshot 
+
+service btld /system/bin/logwrapper /system/bin/btld -pf /system/bin/BCM4330B14.hcd -hb 4000000  -lpm 1
+    user root
+    group bluetooth net_bt_admin
+    disabled
+    oneshot 
+
+service bridgemgrd /system/bin/bridgemgrd
+    class late_start
+    user radio
+    group radio
+    disabled
+
+service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0
+    class late_start
+    user system
+    group system inet
+    disabled
+
+on property:ro.baseband="msm"
+    # Enable BT-DUN only for all msms
+    setprop ro.qualcomm.bluetooth.dun true
+
+service netmgrd /system/bin/netmgrd
+    class late_start
+    disabled
+
+#service sensors /system/bin/sensors.qcom
+#    user root
+#    group root
+#    disabled
+
+on property:ro.use_data_netmgrd=false
+    # netmgr not supported on specific target
+    stop netmgrd
+
+# Adjust socket buffer to enlarge TCP receive window for high bandwidth
+# but only if ro.data.large_tcp_window_size property is set.
+on property:ro.data.large_tcp_window_size=true
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
+
+#service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
+#    class late_start
+#    user bluetooth
+#    group bluetooth net_bt_admin inet net_admin net_raw
+#    disabled
+#    oneshot
+
+service amp_init /system/bin/amploader -i
+    class late_start
+    user root
+    disabled
+    oneshot
+
+service amp_load /system/bin/amploader -l 7000
+    class late_start
+    user root
+    disabled
+    oneshot
+
+service amp_unload /system/bin/amploader -u
+    class late_start
+    user root
+    disabled
+    oneshot
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -aABKG
+    class core
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant \
+        -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
+    #   we will start as root and wpa_supplicant will switch to user wifi
+    #   after setting up the capabilities required for WEXT
+    #   user wifi
+    #   group wifi inet keystore
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service p2p_supplicant /system/bin/wpa_supplicant \
+        -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -N \
+        -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1
+    #   we will start as root and wpa_supplicant will switch to user wifi
+    #   after setting up the capabilities required for WEXT
+    #   user wifi
+    #   group wifi inet keystore
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service wiperiface /system/bin/wiperiface
+    user location
+    group qcom_oncrpc
+    oneshot
+
+service gpsone_daemon /system/bin/gpsone_daemon
+    class late_start
+    user system
+    group system qcom_oncrpc inet
+    disabled
+
+service quipc_igsn /system/bin/quipc_igsn
+    class late_start
+    user gps
+    group inet gps
+    disabled
+
+service quipc_main /system/bin/quipc_main
+    class late_start
+    user gps
+    group net_admin wifi inet gps
+    disabled
+
+service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
+    class late_start
+    user root
+    group system qcom_oncrpc
+    disabled
+    oneshot
+
+on property:crypto.driver.load=1
+     insmod /system/lib/modules/qce.ko
+     insmod /system/lib/modules/qcedev.ko
+
+on property:crypto.driver.load=0
+     exec /system/bin/rmmod qcedev.ko
+     exec /system/bin/rmmod qce.ko
+
+service drmdiag /system/bin/drmdiagapp
+    class late_start
+     user root
+     disabled
+     oneshot
+
+on property:drmdiag.load=1
+    start drmdiag
+
+on property:drmdiag.load=0
+    stop drmdiag
+
+service qcom-sh /system/bin/sh /init.qcom.sh
+    class core
+    user root
+    oneshot
+
+service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
+    class late_start
+    user root
+    disabled
+    oneshot
+
+#service qcom-wifi /system/bin/sh /system/etc/init.qcom.wifi.sh
+#    class late_start
+#    oneshot
+
+on property:sys.boot_completed=1
+    start qcom-post-boot
+
+service atfwd /system/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
+
+#service hdmid /system/bin/hdmid
+#    class late_start
+#    socket hdmid stream 0660 root system graphics
+#    disabled
+
+service hdmid /system/bin/hdmid 
+# socket hdmid stream 0660 root system graphics 
+user system 
+group system graphics 
+socket hdmid stream 0660 system system 
+disabled 
+
+
+
+#on property:ro.hdmi.enable=true
+#    start hdmid
+
+service ppd /system/bin/mm-pp-daemon
+    class late_start
+    user system
+    socket pps stream 0660 system system graphics
+    group system graphics
+
+#service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
+service hostapd /system/bin/hostapd -e/data/misc/wifi/entropy.bin /data/misc/wifi/hostapd.conf
+#    class late_start
+#    user root
+    group system wifi inet
+    oneshot
+    disabled
+
+service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
+    class late_start
+    group radio wifi inet
+    disabled
+    oneshot
+
+on property:persist.data.ds_fmc_app.mode=1
+    start ds_fmc_appd
+
+service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
+    class late_start
+    user system
+    group qcom_oncrpc net_bt_admin inet radio wifi
+    disabled
+
+on property:persist.ims.regmanager.mode=1
+    start ims_regmanager
+
+on property:ro.data.large_tcp_window_size=true
+    # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
+
+service time_daemon /system/bin/time_daemon
+    class late_start
+    user root
+    group root
+    oneshot
+    disabled
+
+on property:persist.timed.enable=true
+    start time_daemon
+
+service ril-daemon1 /system/bin/rild -c 1
+    class late_start
+    socket rild1 stream 660 root radio
+    socket rild-debug1 stream 660 radio system
+    user root
+    disabled
+    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc diag log
+
+service profiler_daemon /system/bin/profiler_daemon
+    class late_start
+    user root
+    group root
+    disabled
+
+service sdcard /system/bin/sdcard /data/media 1023 1023
+    class late_start
+    disabled
+
+on property:persist.fuse_sdcard=true
+    start sdcard
+
+service hcidump /system/bin/sh /system/etc/hcidump.sh
+    user bluetooth
+    group bluetooth system net_bt_admin net_admin
+    disabled
+    oneshot
+
+service atd /system/bin/atd
+    class late_start
+    user system
+    group system inet
+
+service qem /system/bin/qem
+    class late_start
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start qem
+
+on property:sys.lgsetupwizard.status=1
+    start qem
+
+on property:sys.lgsetupwizard.status=2
+    start qem
+
+# LGE_CHANGE_S, [LGE_DATA][TCP_DUMP], gilchan.park@lge.com, 2012-02-16
+service logging_packet /system/xbin/tcpdump -i any -C 4 -W 10 -s 0 -w /data/logger/packet.pcap
+	disabled
+	oneshot
+
+on property:persist.service.logging_packet=1
+	start logging_packet
+
+on property:persist.service.logging_packet=0
+	stop logging_packet
+
+on boot-pause
+    exec system/bin/battery_charging
+
+on post-fs-data
+    chmod 0755 /system/bin/ssbd
+service ssbd /system/bin/ssbd # FEATURE_SDCARD_ENCRYPTION
+    class main
+    disabled
+
+#CRYPT_S Data Encryption For EAS
+on property:persist.sys.email.crypt=1
+    exec /system/bin/crypt_setup 1
+#CRYPT_E
+
+# [LGE_S][IPSecVPN] 20120327, yhak.kim@lge.com : Authentec IPSecVPN Service & IPSecVpn modules permission change
+service vpnclientpm /system/bin/vpnclientpm -O /data/data/com.ipsec.vpnclient/vpnclientpm.txt
+# uid dropped to system when capabilities are set
+    class main
+    group system net_admin net_raw
+    disabled
+
+service vpncstarter /system/bin/vpncstarter
+    class main
+    user system
+    group system net_admin net_raw
+# [LGE_E][IPSecVPN] 20120327, yhak.kim@lge.com : Authentec IPSecVPN Service & IPSecVpn modules permission change
+
+# 04.12.2011 brian1.cheone@lge.com Playready drm 
+# adding for playready DRM to provision and save the keys
+service prapp /system/bin/prapp
+   class main
+   user root
+   group root
+   disabled
+   oneshot
+
+on property:sys.boot_completed=1
+    start prapp
+    
+# end
+on innopath-fota-boot
+    exec /system/bin/innopath_fota_boot
+
+on property:ssbd.enable=1
+    start ssbd
+
+on property:ssbd.enable=0
+    stop ssbd
+
+########################################
+# CAPP_THREADPROFILER
+########################################
+service lgprofd /system/bin/lgprofd
+    socket lgprofd stream 666
+
+########################################
+# CAPP_UNINSTALL_PRELOADED
+########################################
+service post_install /system/vendor/bin/post_install.sh
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start post_install
+
+########################################
+# CAPP_POWEROFF_ANI
+########################################
+service shutdownanim /system/bin/shutdownanimation
+    user graphics
+    group graphics system
+    disabled
+    oneshot
+
+########################################
+# CAPP_DRM
+########################################
+on post-fs-data
+    # create directory for lgdrm
+    mkdir /data/lgdrm 0770 lgdrm lgdrm_acc
+
+########################################
+# CAPP_FONTS
+########################################
+# CAPP_FONTS_HYFONT_0.9.9.5 [dongseok.lee@lge.com 20120206] support chnging fonts
+on post-fs-data
+    mkdir /data/font 775 system system
+    chmod 775 /data/font
+    mkdir /data/font/config 775 system system
+    chmod 775 /data/font/config
+    mkdir /data/font/download 775 system system
+    chmod 775 /data/font/download
+# CAPP_FONTS_HYFONT_0.9.9.5_END
+
+#CAPP_RESERVED_USERDATA
+on property:ro.reserve.blockcount=*
+    exec /system/bin/tune2fs -r $ro.reserve.blockcount \
+              -u system -g system $ro.reserve.userdata
+
+########################################
+# CAPP_DRM
+########################################
+service lgdrm /system/bin/lgdrmserver
+    class main
+    user lgdrm
+    group lgdrm_acc sdcard_rw media_rw system radio
+
+# restart when servicemanager is restarted
+on property:init.svc.servicemanager=restarting
+     restart lgdrm

@@ -1,0 +1,79 @@
+# Common blobs that differ
+# Some of these may be compatible across devices
+system/bin/ami304d
+system/bin/ks
+system/bin/mpdecision
+system/bin/netmgrd
+system/bin/qcks
+system/bin/qmiproxy
+system/bin/qmuxd
+system/bin/rild
+system/bin/thermald
+system/lib/libchromatix_imx105_preview.so
+system/lib/libdsi_netctrl.so
+system/lib/libgemini.so
+system/lib/libmmjpeg.so
+system/lib/libmmjps.so
+system/lib/libmmmpod.so
+system/lib/libmmmpo.so
+system/lib/libqdi.so
+system/lib/libqdp.so
+system/lib/libqmiservices.so
+system/lib/libqmi.so
+system/lib/libril-qc-qmi-1.so
+system/lib/libril.so
+system/lib/libthermal_mitigation_fusion.so
+system/lib/libthermal_mitigation.so
+
+# Blobs specific to i_vzw
+# Some of these may not be necessary
+system/bin/atd
+system/bin/ATFWD-daemon
+system/bin/BCM4330B14.hcd
+system/bin/bridgemgrd
+system/bin/gpsone_daemon
+system/bin/lgdrmserver
+system/bin/mm-pp-daemon
+system/bin/prapp
+system/bin/qem
+system/bin/qseecomd
+system/bin/vpncstarter
+system/lib/hw/gps.msm8660.so
+system/lib/libcommondefs.so
+system/lib/libgpsone_bit_api.so
+system/lib/libgps.so
+system/lib/libgps.utils.so
+system/lib/libloc_adapter.so
+system/lib/libloc_api-rpc-qc.so
+system/lib/libloc_eng.so
+system/lib/libloc_ext.so
+system/lib/liboem_rapi_fusion.so
+system/lib/liboem_rapi.so
+
+
+# These files contain unchecked references to partition names
+system/etc/init.qcom.mdm_links.sh
+system/etc/init.qcom.modem_links.sh
+
+# Separate kernels for now
+# (and bootimages, chargerimages)
+# XXX: handle kernel modules automatically?
+boot.img
+system/lib/modules/bthid.ko
+system/lib/modules/max2165.ko
+system/lib/modules/mt2060.ko
+system/lib/modules/mt2131.ko
+system/lib/modules/mt2266.ko
+system/lib/modules/mxl5005s.ko
+system/lib/modules/mxl5007t.ko
+system/lib/modules/qt1010.ko
+system/lib/modules/scsi_wait_scan.ko
+system/lib/modules/tda18212.ko
+system/lib/modules/tda18218.ko
+
+# Carrier specific files
+system/etc/apns-conf.xml
+system/build.prop
+system/framework/framework-res.apk
+system/framework/framework.jar
+system/app/Mms.apk
