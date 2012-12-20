@@ -6,6 +6,10 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/i_vzw/overlay
 
 # XXX: some (most?) of these belong in iproj/device.mk
 
+# Bluetooth
+PRODUCT_COPY_FILES += \
+	device/lge/i_vzw/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh
+
 # XXX: these need cleaned up, they are more like aosp40 than cm10
 PRODUCT_COPY_FILES += \
 	device/lge/i_vzw/prebuilt/root/init.iproj.rc:root/init.iproj.rc \

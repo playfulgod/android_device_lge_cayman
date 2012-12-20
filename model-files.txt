@@ -29,15 +29,16 @@ system/lib/libthermal_mitigation.so
 # Some of these may not be necessary
 system/bin/atd
 system/bin/ATFWD-daemon
-system/bin/BCM4330B14.hcd
 system/bin/bridgemgrd
 system/bin/gpsone_daemon
+system/bin/init.qcom.bt.sh
 system/bin/lgdrmserver
 system/bin/mm-pp-daemon
 system/bin/prapp
 system/bin/qem
 system/bin/qseecomd
 system/bin/vpncstarter
+system/etc/firmware/BCM4330B14.hcd
 system/lib/hw/gps.msm8660.so
 system/lib/libcommondefs.so
 system/lib/libgpsone_bit_api.so

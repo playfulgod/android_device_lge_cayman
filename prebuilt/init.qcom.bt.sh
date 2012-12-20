@@ -25,7 +25,7 @@ failed ()
 start_hciattach ()
 {
   echo 1 > $BLUETOOTH_SLEEP_PATH
-  /system/bin/hciattach -n /dev/ttyHS0 any 3000000 flow &
+  /system/bin/hciattach -n /dev/ttyHS0 any 4000000 flow &
   hciattach_pid=$!
   logi "start_hciattach: pid = $hciattach_pid"
 }
@@ -39,9 +39,8 @@ kill_hciattach ()
   # this shell doesn't exit now -- wait returns for normal exit
 }
 
-/system/bin/brcm_patchram_plus -d --patchram /etc/firmware/BCM4325D1_004.002.004.0218.0248.hcd /dev/ttyHS0
-logi "Setting baudrate..."
-/system/bin/brcm_patchram_plus -d -baudrate 3000000 /dev/ttyHS0 
+/system/bin/brcm_patchram_plus --no2bytes --patchram /etc/firmware/BCM4330B14.hcd /dev/ttyHS0
+/system/bin/brcm_patchram_plus --no2bytes -baudrate 4000000 /dev/ttyHS0 
 exit_code_hci_qcomm_download=$?
 
 case $exit_code_hci_qcomm_download in
@@ -54,7 +53,6 @@ trap "kill_hciattach" TERM INT
 
 start_hciattach
 
-# Give hciattach time to settle
 sleep 10
 logi "Fixing PCM setting..."
 /system/xbin/hcitool cmd 0x3f 0x1c 0x00 0x04 0x00 0x00 0x00 || loge "FAILED"
