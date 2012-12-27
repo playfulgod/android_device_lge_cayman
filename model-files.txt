@@ -40,6 +40,7 @@ system/bin/qseecomd
 system/bin/vpncstarter
 system/etc/firmware/BCM4330B14.hcd
 system/lib/hw/gps.msm8660.so
+system/lib/libaudcal.so
 system/lib/libcommondefs.so
 system/lib/libgpsone_bit_api.so
 system/lib/libgps.so
