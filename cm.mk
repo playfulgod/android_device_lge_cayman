@@ -1,5 +1,5 @@
 # Release name
-PRODUCT_RELEASE_NAME := Iproj
+PRODUCT_RELEASE_NAME := Spectrum
 
 # Custom apns must come before cdma.mk is included
 PRODUCT_COPY_FILES += \
