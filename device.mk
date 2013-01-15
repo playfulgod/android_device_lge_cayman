@@ -16,8 +16,7 @@ PRODUCT_COPY_FILES += \
 	device/lge/i_vzw/prebuilt/root/init.iproj.usb.rc:root/init.iproj.usb.rc \
 	device/lge/i_vzw/prebuilt/root/init.qcom.sh:root/init.qcom.sh \
 	device/lge/i_vzw/prebuilt/root/init.usb.rc:root/init.usb.rc \
-	device/lge/i_vzw/prebuilt/root/ueventd.iproj.rc:root/ueventd.iproj.rc \
-	device/lge/i_vzw/prebuilt/root/ueventd.rc:root/ueventd.rc
+	device/lge/i_vzw/prebuilt/root/ueventd.iproj.rc:root/ueventd.iproj.rc
 
 # Recovery (i_vzw specific)
 PRODUCT_COPY_FILES += \
