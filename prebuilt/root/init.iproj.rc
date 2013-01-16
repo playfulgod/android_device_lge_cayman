@@ -247,6 +247,7 @@ on emmc-fs
     mount vfat /dev/block/mmcblk0p1 /firmware ro shortname=lower,umask=0003
 #[LGE_UPDATE_E] by jaein.lee(2011.06.29)
     exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
+    exec /system/bin/sh /system/etc/init.qcom.mdm_links.sh
 
 
 on post-fs
@@ -456,13 +457,11 @@ service kickstart /system/bin/qcks l
 on property:ro.baseband=csfb
     wait /dev/ttyHSL1
     mkdir /data/qcks 0770 system system
-    exec /system/bin/sh /system/etc/init.qcom.mdm_links.sh
     start kickstart
 
 on property:ro.baseband=svlte2a
     wait /dev/ttyHSL1
     mkdir /data/qcks 0770 system system
-    exec /system/bin/sh /system/etc/init.qcom.mdm_links.sh
     start kickstart
 
 on property:ro.baseband=svlte2a
