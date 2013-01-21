@@ -457,18 +457,19 @@ service kickstart /system/bin/qcks l
 on property:ro.baseband=csfb
     wait /dev/ttyHSL1
     mkdir /data/qcks 0770 system system
-    exec /system/bin/sh /system/etc/init.qcom.baseband.sh
     start kickstart
 
 on property:ro.baseband=svlte2a
     wait /dev/ttyHSL1
     mkdir /data/qcks 0770 system system
-    exec /system/bin/sh /system/etc/init.qcom.baseband.sh
     start kickstart
 
 on property:ro.baseband=svlte2a
    setprop ro.config.ehrpd true
    setprop ro.ril.svlte1x true
+
+on property:dev.bootcomplete=1
+    exec /system/bin/sh /system/etc/init.qcom.baseband.sh
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     class main
