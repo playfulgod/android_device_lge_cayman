@@ -619,6 +619,9 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
+on property:dev.bootcomplete=1
+    exec /system/bin/hwaddrs
+
 service ami304d /system/bin/ami304d
     class main
     user compass
