@@ -59,19 +59,7 @@ system/etc/init.qcom.modem_links.sh
 
 # Separate kernels for now
 # (and bootimages, chargerimages)
-# XXX: handle kernel modules automatically?
 boot.img
-system/lib/modules/bthid.ko
-system/lib/modules/max2165.ko
-system/lib/modules/mt2060.ko
-system/lib/modules/mt2131.ko
-system/lib/modules/mt2266.ko
-system/lib/modules/mxl5005s.ko
-system/lib/modules/mxl5007t.ko
-system/lib/modules/qt1010.ko
-system/lib/modules/scsi_wait_scan.ko
-system/lib/modules/tda18212.ko
-system/lib/modules/tda18218.ko
 
 # Carrier specific files
 system/etc/apns-conf.xml
