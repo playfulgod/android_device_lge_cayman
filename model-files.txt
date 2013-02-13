@@ -31,7 +31,6 @@ system/bin/atd
 system/bin/ATFWD-daemon
 system/bin/bridgemgrd
 system/bin/gpsone_daemon
-system/bin/init.qcom.bt.sh
 system/bin/lgdrmserver
 system/bin/mm-pp-daemon
 system/bin/prapp

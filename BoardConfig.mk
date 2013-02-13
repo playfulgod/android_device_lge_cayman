@@ -8,21 +8,23 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 422576128
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
 
 # Kernel
-BOARD_USE_PREBUILT_KERNEL := true
+BOARD_USE_PREBUILT_KERNEL := false
 
 ifeq ($(BOARD_USE_PREBUILT_KERNEL),true)
 TARGET_PREBUILT_KERNEL_DIR := device/lge/i_vzw/kernels/q
 else
 # Build kernel from source
 TARGET_KERNEL_SOURCE := kernel/lge/iproj
-TARGET_KERNEL_CONFIG := spectrum_defconfig
+TARGET_KERNEL_CONFIG := q_i_vzw_defconfig
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 endif
 
 BOARD_KERNEL_CMDLINE := androidboot.hardware=iproj
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_BASE := 0x40200000
-BOARD_FORCE_RAMDISK_ADDRESS := 0x41a00000
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
+
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/i_vzw/bluetooth
 
 include device/lge/iproj/BoardConfig.mk
 

@@ -7,7 +7,6 @@ service.adb.root=1
 ro.lge.proximity.delay=100
 
 #RIL properties
-rild.libargs=-d /dev/smd0
 rild.libpath=/system/lib/libril-qc-qmi-1.so
 ril.subscription.types=NV,RUIM
 ro.telephony.ril_class=LGEQualcommUiccRIL
