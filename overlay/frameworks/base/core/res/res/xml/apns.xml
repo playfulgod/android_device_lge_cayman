@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<apns version="6">
+    <apn carrier="NCC" mcc="311" mnc="261" user="ncc" password="ncc" apn="internet" type="" ipversion="4" />
+    <apn carrier="TESTIMS" mcc="001" mnc="01" user="ncc" password="ncc" apn="IMS" type="ims" ipversion="4,6" inactivitytime="3480" enabled="1" apnid="1" />
+    <apn carrier="TESTADMIN" mcc="001" mnc="01" user="ncc" password="ncc" apn="ADMIN" type="admin" ipversion="4" inactivitytime="3480" enabled="1" apnid="2" />
+    <apn carrier="TESTINTERNET" mcc="001" mnc="01" user="ncc" password="ncc" apn="INTERNET" type="internet" ipversion="4,6" inactivitytime="3480" enabled="1" apnid="3" />
+    <apn carrier="TESTAPP" mcc="001" mnc="01" user="ncc" password="ncc" apn="APP" type="vzwapp" ipversion="4,6" inactivitytime="3480" enabled="1" apnid="4" />
+    <apn carrier="INTERNETforCMW" mcc="001" mnc="01" user="ncc" password="ncc" apn="cmw500.rohde-schwarz.com" type="internet" ipversion="4,6" inactivitytime="3480" enabled="1" apnid="3" />
+    <apn carrier="INTERNETforCMW" mcc="001" mnc="010" user="ncc" password="ncc" apn="cmw500.rohde-schwarz.com" type="internet" ipversion="4,6" inactivitytime="3480" enabled="1" apnid="3" />
+    <apn carrier="TESTIMS_2" mcc="001" mnc="010" user="ncc" password="ncc" apn="IMS" type="ims" ipversion="4,6" inactivitytime="3480" enabled="0" apnid="1" />
+    <apn carrier="TESTADMIN_2" mcc="001" mnc="010" user="ncc" password="ncc" apn="ADMIN" type="admin" ipversion="4" inactivitytime="3480" enabled="0" apnid="2" />
+    <apn carrier="TESTINTERNET_2" mcc="001" mnc="010" user="ncc" password="ncc" apn="INTERNET" type="internet" ipversion="4,6" inactivitytime="3480" enabled="1" apnid="3" />
+    <apn carrier="TESTAPP_2" mcc="001" mnc="010" user="ncc" password="ncc" apn="APP" type="vzwapp" ipversion="4,6" inactivitytime="3480" enabled="0" apnid="4" />
+    <apn carrier="MetroPCSInternetAPN" mcc="311" mnc="660" apn="internet.metropcs" type="internet" authtype="0" ipversion="4" inactivitytime="3480" enabled="1" apnid="3" mmsc="http://mms.metropcs.net:3128/mmsc" />
+    <apn carrier="MetroPCSInternetAPN" mcc="311" mnc="66" apn="internet.metropcs" type="internet" authtype="0" ipversion="4" inactivitytime="3480" enabled="1" apnid="3" mmsc="http://mms.metropcs.net:3128/mmsc" />
+    <apn carrier="MetroPCSIMSAPN" mcc="311" mnc="660" apn="ims.metropcs" type="ims" authtype="0" ipversion="4" inactivitytime="3480" enabled="1" apnid="1" />
+    <apn carrier="MetroPCSIMSAPN" mcc="311" mnc="66" apn="ims.metropcs" type="ims" authtype="0" ipversion="4" inactivitytime="3480" enabled="1" apnid="1" />
+    <apn carrier="MetroPCSAdminAPN" mcc="311" mnc="660" apn="admin.metropcs" type="admin" authtype="0" ipversion="4" inactivitytime="3480" enabled="1" apnid="2" />
+    <apn carrier="METROIMS" mcc="311" mnc="66" apn="admin.metropcs" type="admin" authtype="0" ipversion="4" inactivitytime="3480" enabled="1" apnid="2" />
+</apns>

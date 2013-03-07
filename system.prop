@@ -38,12 +38,12 @@ persist.radio.no_wait_for_card=1
 ro.cdma.voicemail.number=mine
 
 ro.com.google.clientidbase=android-lge
-ro.com.google.clientidbase.ms=android-verizon
+ro.com.google.clientidbase.ms=android-metropcs
 ro.com.google.clientidbase.gmm=android-lge
-ro.com.google.clientidbase.yt=android-verizon
-ro.com.google.clientidbase.am=android-verizon
-ro.cdma.home.operator.alpha=Verizon
-ro.cdma.home.operator.numeric=310004
+ro.com.google.clientidbase.yt=android-metropcs
+ro.com.google.clientidbase.am=android-metropcs
+ro.cdma.home.operator.alpha=MetroPCS
+ro.cdma.home.operator.numeric=311660
 
 ## Wifi
 wifi.supplicant_scan_interval=20
@@ -73,7 +73,7 @@ persist.sys.email.crypt_mnt=0
 
 
 ## Screen config
-ro.sf.lcd_density=320
+ro.sf.lcd_density=240
 windowsmgr.max_events_per_sec=150
 debug.sf.hw=1
 debug.enabletr=true

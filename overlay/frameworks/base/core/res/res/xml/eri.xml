@@ -40,7 +40,7 @@
          <EriInfo RoamingIndicator="1"
                   IconIndex="1"
                   IconMode="0"
-                  EriText="Verizon Wireless"
+                  EriText=""
                   CallPromptId="0"
                   AlertId="0"/>
 
@@ -54,7 +54,7 @@
          <EriInfo RoamingIndicator="64"
                   IconIndex="1"
                   IconMode="0"
-                  EriText="Verizon Wireless"
+                  EriText=""
                   CallPromptId="0"
                   AlertId="0"/>
 
@@ -145,7 +145,7 @@
          <EriInfo RoamingIndicator="77"
                   IconIndex="2"
                   IconMode="1"
-                  EriText="Verizon Wireless"
+                  EriText=""
                   CallPromptId="0"
                   AlertId="0"/>
 

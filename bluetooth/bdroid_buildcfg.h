@@ -17,6 +17,6 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "VS920 4G"
+#define BTM_DEF_LOCAL_NAME   "MS840 4G"
 
 #endif
